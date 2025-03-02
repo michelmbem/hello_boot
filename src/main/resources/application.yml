@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: Hello Boot
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:free
+    username: testuser
+    password: testpwd
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
