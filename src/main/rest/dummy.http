@@ -1,0 +1,72 @@
+### Create a new dummy
+POST http://localhost:8080/api/dummy
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Red",
+  "description": "Red dummy entity",
+  "items": [
+    {
+      "name": "Red item #1",
+      "price": 100
+    },
+    {
+      "name": "Red item #2",
+      "price": 150
+    },
+    {
+      "name": "Red item #3",
+      "price": 200
+    }
+  ]
+}
+
+### Get a list of all api/dummy
+GET http://localhost:8080/api/dummy
+Content-Type: application/json
+Accept: application/json
+
+### Get a dummy by id
+GET http://localhost:8080/api/dummy/165
+Content-Type: application/json
+Accept: application/json
+
+### Get a dummy by name
+GET http://localhost:8080/api/dummy/of-name/Red
+Content-Type: application/json
+Accept: application/json
+
+### Update a dummy
+PUT http://localhost:8080/api/dummy/165
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Blue",
+  "description": "Blue dummy entity",
+  "items": [
+    {
+      "id": 155,
+      "name": "Blue item #1",
+      "price": 200
+    },
+    {
+      "id": 156,
+      "name": "Blue item #2",
+      "price": 100
+    },
+    {
+      "id": 157,
+      "name": "Blue item #3",
+      "price": 150
+    }
+  ]
+}
+
+### Delete a dummy
+DELETE http://localhost:8080/api/dummy/165
+Content-Type: application/json
+Accept: application/json
+
+###

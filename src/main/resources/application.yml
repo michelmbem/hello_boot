@@ -1,13 +1,24 @@
+#ORACLE_HOST: localhost
+ORACLE_HOST: host.docker.internal
+ORACLE_USER: testuser
+ORACLE_PWD: testpwd
+
 spring:
   application:
     name: Hello Boot
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:free
-    username: testuser
-    password: testpwd
+    url: jdbc:oracle:thin:@${ORACLE_HOST}:1521:free
+    username: ${ORACLE_USER}
+    password: ${ORACLE_PWD}
   jpa:
     database-platform: org.hibernate.dialect.OracleDialect
     show-sql: true
+    properties:
+      hibernate.format_sql: true
     hibernate:
       ddl-auto: none
+
+springdoc:
+  swagger-ui:
+    enabled: true
