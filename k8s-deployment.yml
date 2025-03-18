@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-boot
+  labels:
+    app: hello-boot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-boot
+  template:
+    metadata:
+      labels:
+        app: hello-boot
+    spec:
+      containers:
+        - name: hello-boot
+          image: localhost:5000/hello-boot:1.0
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 300m
+              memory: 512Mi
