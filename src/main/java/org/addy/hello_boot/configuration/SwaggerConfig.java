@@ -12,13 +12,15 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI configureOpenAPI() {
-        return new OpenAPI().info(new Info()
-                .title("Hello Boot")
-                .description("Simple Spring Boot REST API")
-                .license(getLicense())
-                .termsOfService("https://docs.github.com/site-policy/github-terms/github-terms-of-service")
-                .version("1.0.0")
-                .contact(getContact()));
+        return new OpenAPI().info(
+                new Info()
+                        .title("Hello Boot")
+                        .description("Simple Spring Boot REST API")
+                        .license(getLicense())
+                        .termsOfService("https://docs.github.com/site-policy/github-terms/github-terms-of-service")
+                        .version("1.0.0")
+                        .contact(getContact())
+        );
     }
 
     private License getLicense() {
