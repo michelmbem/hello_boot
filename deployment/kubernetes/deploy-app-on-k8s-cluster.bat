@@ -34,6 +34,7 @@ echo "Checking the service..."
 kubectl get service hello-boot
 echo "----------------------------------------------------------------"
 
+del ..\docker\application\*.war
 echo "Done"
 exit
 

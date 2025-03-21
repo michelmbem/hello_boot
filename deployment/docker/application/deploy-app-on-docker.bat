@@ -9,6 +9,7 @@ if %errorlevel% neq 0 goto error
 docker run -d --name hello-boot hello-boot:1.0
 if %errorlevel% neq 0 goto error
 
+del .\*.war
 echo "Done"
 exit
 
