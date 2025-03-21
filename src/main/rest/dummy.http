@@ -22,13 +22,18 @@ Accept: application/json
   ]
 }
 
-### Get a list of all api/dummy
+### Get the list of all dummies
 GET http://localhost:8080/api/dummy
 Content-Type: application/json
 Accept: application/json
 
+### Get the list of dummies that have 'Gre' in their name
+GET http://localhost:8080/api/dummy/of-name-part/gre
+Content-Type: application/json
+Accept: application/json
+
 ### Get a dummy by id
-GET http://localhost:8080/api/dummy/165
+GET http://localhost:8080/api/dummy/1
 Content-Type: application/json
 Accept: application/json
 
@@ -38,7 +43,7 @@ Content-Type: application/json
 Accept: application/json
 
 ### Update a dummy
-PUT http://localhost:8080/api/dummy/165
+PUT http://localhost:8080/api/dummy/1
 Content-Type: application/json
 Accept: application/json
 
@@ -47,17 +52,17 @@ Accept: application/json
   "description": "Blue dummy entity",
   "items": [
     {
-      "id": 155,
+      "id": 1,
       "name": "Blue item #1",
       "price": 200
     },
     {
-      "id": 156,
+      "id": 2,
       "name": "Blue item #2",
       "price": 100
     },
     {
-      "id": 157,
+      "id": 3,
       "name": "Blue item #3",
       "price": 150
     }

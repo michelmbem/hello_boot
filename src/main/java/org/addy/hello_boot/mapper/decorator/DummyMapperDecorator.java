@@ -1,10 +1,13 @@
-package org.addy.hello_boot.mapper;
+package org.addy.hello_boot.mapper.decorator;
 
 import org.addy.hello_boot.dto.DummyDto;
 import org.addy.hello_boot.dto.DummyItemDto;
+import org.addy.hello_boot.mapper.DummyItemMapper;
+import org.addy.hello_boot.mapper.DummyMapper;
 import org.addy.hello_boot.model.Dummy;
 import org.addy.hello_boot.model.DummyItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,13 +15,15 @@ import java.util.Set;
 
 public abstract class DummyMapperDecorator implements DummyMapper {
     @Autowired
-    private DummyMapper dummyMapper;
+    @Qualifier("delegate")
+    private DummyMapper delegate;
+
     @Autowired
-    private DummyItemMapper dummyItemMapper;
+    private DummyItemMapper itemMapper;
 
     @Override
     public Dummy fromDto(DummyDto dummyDto) {
-        Dummy dummy = dummyMapper.fromDto(dummyDto);
+        Dummy dummy = delegate.fromDto(dummyDto);
 
         for (DummyItem item : dummy.getItems()) {
             item.setParent(dummy);
@@ -29,7 +34,7 @@ public abstract class DummyMapperDecorator implements DummyMapper {
 
     @Override
     public void updateFromDto(DummyDto dummyDto, Dummy dummy) {
-        dummyMapper.updateFromDto(dummyDto, dummy);
+        delegate.updateFromDto(dummyDto, dummy);
         syncItems(dummyDto, dummy);
     }
 
@@ -41,14 +46,14 @@ public abstract class DummyMapperDecorator implements DummyMapper {
 
         for (DummyItemDto givenItem : givenItems) {
             DummyItem originalItem = originalItems.stream()
-                    .filter(it -> Objects.equals(givenItem.getId(), it.getId()))
+                    .filter(item -> Objects.equals(givenItem.getId(), item.getId()))
                     .findFirst()
                     .orElse(null);
 
             if (originalItem != null) {
-                dummyItemMapper.updateFromDto(givenItem, originalItem);
+                itemMapper.updateFromDto(givenItem, originalItem);
             } else {
-                var newItem = dummyItemMapper.fromDto(givenItem);
+                DummyItem newItem = itemMapper.fromDto(givenItem);
                 newItem.setParent(dummy);
                 newItems.add(newItem);
             }

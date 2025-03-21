@@ -1,0 +1,41 @@
+networks:
+  oracle-net:
+    driver: bridge
+
+services:
+  oracle:
+    image: container-registry.oracle.com/database/free:latest
+    container_name: oracle-free
+    restart: unless-stopped
+    environment:
+      ORACLE_PWD: oradmin
+    ports:
+      - 1521:1521
+    volumes:
+      - ./volumes/oracle/backup:/opt/oracle/backup
+      - ./volumes/oracle/data:/opt/oracle/oradata
+      - ./volumes/oracle/scripts:/opt/oracle/scripts/startup
+    networks:
+      - oracle-net
+
+  dbgate:
+    image: dbgate/dbgate
+    container_name: dbgate
+    restart: unless-stopped
+    depends_on:
+      - oracle
+    ports:
+      - 3100:3000
+    volumes:
+      - ./volumes/dbgate:/root/.dbgate
+    environment:
+      CONNECTIONS: oracle
+      LABEL_oracle: Oracle Database Free
+      SERVER_oracle: oracle-free
+      PORT_oracle: 1521
+      USER_oracle: testuser
+      PASSWORD_oracle: testpwd
+      ENGINE_oracle: oracle@dbgate-plugin-oracle
+      NODE_OPTIONS: --openssl-legacy-provider
+    networks:
+      - oracle-net

@@ -7,12 +7,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel="spring")
+import static org.mapstruct.ReportingPolicy.IGNORE;
+
+@Mapper(componentModel="spring", unmappedTargetPolicy=IGNORE)
 public interface DummyItemMapper {
     DummyItemDto toDto(DummyItem dummyItem);
-    @Mapping(target="parent", ignore=true)
-    DummyItem fromDto(DummyItemDto dummyItemDto);
-    @InheritConfiguration
+
     @Mapping(target="id", ignore=true)
+    DummyItem fromDto(DummyItemDto dummyItemDto);
+
+    @InheritConfiguration
     void updateFromDto(DummyItemDto dummyItemDto, @MappingTarget DummyItem dummyItem);
 }
