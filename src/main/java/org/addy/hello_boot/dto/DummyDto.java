@@ -2,7 +2,7 @@ package org.addy.hello_boot.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,8 +20,8 @@ public class DummyDto {
     @Schema(description="Identifier of the dummy entity", example="1")
     private Long id;
 
-    @NotNull
-    @Size(min=1, max=50)
+    @NotEmpty
+    @Size(max=50)
     @Schema(description="Name of the dummy entity", example="Red")
     private String name;
 
