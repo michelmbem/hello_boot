@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-
     @Bean
     public OpenAPI configureOpenAPI() {
         return new OpenAPI().info(
@@ -35,5 +34,4 @@ public class SwaggerConfig {
                 .email("addysoft@addy.org")
                 .url("https://www.addy.org/addy-soft/");
     }
-
 }

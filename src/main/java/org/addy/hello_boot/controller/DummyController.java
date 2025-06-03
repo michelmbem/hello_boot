@@ -22,7 +22,6 @@ import java.util.List;
 @Tag(name="Dummy API", description="Dummy entity operations")
 @RequiredArgsConstructor
 public class DummyController {
-
     private final DummyService dummyService;
 
     @GetMapping
