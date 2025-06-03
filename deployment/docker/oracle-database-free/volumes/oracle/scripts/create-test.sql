@@ -8,7 +8,7 @@ connect testuser/testpwd@//localhost:1521/free;
 create table dummy
 (
     id number(10) not null primary key,
-    name varchar2(50) check (length(trim(name)) > 0),
+    name varchar2(50) not null check (length(trim(name)) > 0),
     description varchar2(200)
 );
 
@@ -16,7 +16,7 @@ create table dummy_item
 (
     id number(10) not null primary key,
     name varchar2(50) not null check (length(trim(name)) > 0),
-    price number(30, 10) not null check (price > 0),
+    price number(30, 10) not null check (price >= 0),
     parent_id number(10) not null references dummy on delete cascade
 );
 
